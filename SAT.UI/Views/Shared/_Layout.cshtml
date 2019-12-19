@@ -43,25 +43,33 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href=@Url.Action("Index","Home")>Home <span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#MenuDropdown" data-toggle="collapse" aria-controls="MenuDropdown" aria-expanded="false">Examples &amp; Pages</a>
-                                <ul id="MenuDropdown" class="sub-navbar collapse flex-column">
-                                    <li class="nav-item"><a class="nav-link" href="examples.html">Style Examples</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="three-column.html">Three Column</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="one-column.html">One column / no sidebar</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="text.html">Text / left sidebar</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="index-right.html">Right navigation</a></li>
-                                </ul>
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index","Courses")>Courses</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Services</a>
+                                <a class="nav-link" href=@Url.Action("Index","ScheduledClasses")>Scheduled Classes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Products</a>
+                                <a class="nav-link" href=@Url.Action("Index","Enrollments")>Enrollment</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index","Students")>Students</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index","StudentStatuses")>Student Status</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index","ScheduledClassStatus")>Scheduled Class Status</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href=@Url.Action("Contact","Home")>Contact</a>
                             </li>
+                            <li class="nav-item">
+                                <h4>Account Links</h4>
+                                @Html.Partial("_LoginPartial")
+                            </li>
+
+
                         </ul>
                     </div>
                 </nav>
