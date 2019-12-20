@@ -10,6 +10,8 @@ using SAT.DATA;
 
 namespace SAT.UI.Controllers
 {
+    [Authorize(Roles = "Admin,Student")]
+
     public class StudentsController : Controller
     {
         private SATEntities db = new SATEntities();
@@ -37,6 +39,7 @@ namespace SAT.UI.Controllers
         }
 
         // GET: Students/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.SSID = new SelectList(db.StudentStatuses, "SSID", "SSName");
@@ -46,6 +49,7 @@ namespace SAT.UI.Controllers
         // POST: Students/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "StudentId,FirstName,LastName,Major,Address,City,State,ZipCode,Phone,Email,PhotoUrl,SSID")] Student student)
@@ -62,6 +66,7 @@ namespace SAT.UI.Controllers
         }
 
         // GET: Students/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -80,6 +85,7 @@ namespace SAT.UI.Controllers
         // POST: Students/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "StudentId,FirstName,LastName,Major,Address,City,State,ZipCode,Phone,Email,PhotoUrl,SSID")] Student student)
@@ -95,6 +101,7 @@ namespace SAT.UI.Controllers
         }
 
         // GET: Students/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -110,6 +117,7 @@ namespace SAT.UI.Controllers
         }
 
         // POST: Students/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
