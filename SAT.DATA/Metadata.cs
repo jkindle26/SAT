@@ -51,7 +51,14 @@ namespace SAT.DATA
 
     #region Student
     [MetadataType(typeof(StudentMetadata))]
-    public partial class Student { }
+    public partial class Student {
+        //this is where i would add custom read-only properties
+        public string FullName
+        {
+            get { return LastName + " " + FirstName; }
+            
+        }
+    }
     public  class StudentMetadata
     {
         [Required(ErrorMessage ="***Required***")]
@@ -84,6 +91,7 @@ namespace SAT.DATA
         [Required(ErrorMessage = "***Required***")]
         [DataType(DataType.EmailAddress,ErrorMessage ="Please enter valid email address")]
         public string Email { get; set; }
+        [Display(Name ="Photo Url")]
         public string PhotoUrl { get; set; }
     }
     #endregion

@@ -2,6 +2,8 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using SAT.DATA;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -145,7 +147,7 @@ namespace IdentitySample.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase photo)
         {
             if (ModelState.IsValid)
             {
@@ -153,11 +155,72 @@ namespace IdentitySample.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    #region Add Custom Student
+
+                    Student student = new Student()
+                    {
+                        StudentId = user.Id,
+                        FirstName= model.FirstName,
+                        LastName=model.LastName,
+                        Major=model.Major,
+                        Address=model.Address,
+                        City=model.City,
+                        State=model.State,
+                        ZipCode=model.ZipCode,
+                        Phone=model.Phone,
+                        Email=user.Email,
+                        PhotoUrl= "noImage.jpg",
+                        SSID=1//active upon registration
+                    };
+                    //this is where our file upload logic will go
+                    //check to see if there is a photo
+
+                    if (photo !=null)
+                    {
+                        //if there is a photo, make sure it's an image
+                        string file = photo.FileName;
+                        string ext = file.Substring(file.LastIndexOf('.'));
+
+                        //create a white list of acceptable extensions
+                        string[] goodExts = { ".jpeg", ".jpg", ".png", ".gif" };
+
+                        //check and see if it is an image
+                        if (goodExts.Contains(ext))
+                        {
+                            //check the filesize
+                            if (photo.ContentLength <= 10000000) //10mb
+                            {
+
+                                //assign it a filename
+                                file = Guid.NewGuid() + ext;
+                                //save it
+                                photo.SaveAs(Server.MapPath("~/Content/images/" + file));
+                                //reassign the photourl to whatever we named the photo
+                                student.PhotoUrl = file;
+                            }
+                        }
+
+                    }
+
+                    //reassign the PhotoUrl to whatever we named the photo
+
+                    //once we've created a new student, save it to the db
+                    SATEntities db = new SATEntities();
+                    db.Students.Add(student);//adding to the db
+                    db.SaveChanges();//persistingthsi to the db
+
+                    //assign the role of student
+                    UserManager.AddToRole(user.Id, "Student");
+
+                    #endregion
+
+
+
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                     ViewBag.Link = callbackUrl;
-                    return View("DisplayEmail");
+                    return View("Login");//Send them to the login view
                 }
                 AddErrors(result);
             }

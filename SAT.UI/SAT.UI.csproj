@@ -195,6 +195,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\examples.html" />
+    <Content Include="Content\images\noImage.jpg" />
+    <Content Include="Content\images\shyguy.jpg" />
     <Content Include="Content\index-right.html" />
     <Content Include="Content\index.html" />
     <Content Include="Content\one-column.html" />
@@ -1579,7 +1581,6 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
@@ -2197,6 +2198,8 @@
     <Content Include="Views\StudentStatus\Details.cshtml" />
     <Content Include="Views\StudentStatus\Edit.cshtml" />
     <Content Include="Views\StudentStatus\Index.cshtml" />
+    <Content Include="Views\Account\Register - Copy.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

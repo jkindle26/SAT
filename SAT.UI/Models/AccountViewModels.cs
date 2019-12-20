@@ -79,6 +79,39 @@ namespace IdentitySample.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        #region Student Property Info
+        [Required(ErrorMessage = "***Required***")]
+        [Display(Name = "First Name")]
+        [StringLength(20, ErrorMessage = "***First Name can't be more than 20 characters")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "***Required***")]
+        [Display(Name = "Last Name")]
+        [StringLength(20, ErrorMessage = "***Last Name can't be more than 20 characters")]
+        public string LastName { get; set; }
+
+        [Required(ErrorMessage = "***Required***")]
+        [Display(Name = "Major")]
+        [StringLength(15, ErrorMessage = "***Major can't be more than 15 characters")]
+        public string Major { get; set; }
+        [StringLength(50, ErrorMessage = "Address can't be more than 50 characters")]
+        public string Address { get; set; }
+        [StringLength(25, ErrorMessage = "City can't be more than 25 characters")]
+        public string City { get; set; }
+        [StringLength(2, MinimumLength = 2, ErrorMessage = "Use state abbrievation")]
+        public string State { get; set; }
+        [StringLength(10, ErrorMessage = "Zip code can't be more than 10 characters")]
+        [Display(Name = "Zip Code")]
+        [DataType(DataType.PostalCode, ErrorMessage = "Please enter valid zip code")]
+        public string ZipCode { get; set; }
+        [StringLength(13, ErrorMessage = "Phone number can't be more than 13 characters")]
+        public string Phone { get; set; }
+        [Display(Name = "Photo Url")]
+        public string PhotoUrl { get; set; }
+
+        #endregion
+
     }
 
     public class ResetPasswordViewModel
